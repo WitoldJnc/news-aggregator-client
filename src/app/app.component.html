@@ -1,0 +1,22 @@
+<form class="container" [formGroup]="resForm">
+    <label for="resources">Resources</label>
+    <select formControlName="resources" id="resources" (change)="navigateTo($event.target.value)">
+        <option selected="selected">all</option>
+        <option *ngFor="let res of resources">
+            {{res}}
+        </option>
+    </select>
+
+    <label for="catigories">Catigoies</label>
+    <select formControlName="catigories" id="catigories" [(ngModel)]="selectedCatigory" (change)="emitCatigory()">
+        <option selected="selected">all</option>
+        <option *ngFor="let cat of catigories">
+            {{cat}}
+        </option>
+    </select>
+</form>
+
+
+
+
+<router-outlet></router-outlet>
