@@ -8,8 +8,6 @@ export class ByCatigoriesPipe implements PipeTransform {
 
     transform(value: Item[], catigory: string): Item[] {
         if (catigory === 'all' || catigory === undefined || catigory === null) {
-            console.log(value)
-            console.log(catigory)
             return value;
         } else {
             return value

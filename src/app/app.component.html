@@ -1,16 +1,10 @@
-<div class="container">
-    <p (click)="navigateTo('all')">all</p>
-    <div *ngFor="let res of resources">
-        <p (click)="navigateTo(res)">{{res}}</p>
-    </div>
-</div>
-
-<form class="container" [formGroup]="resForm" >
-    <label for="catigories">Catigoies</label>
-    <select formControlName="catigories" id="catigories">
-        <option selected="selected">all</option>
-        <option *ngFor="let cat of catigories" >
-            {{cat}}
+<form class="container" [formGroup]="resForm">
+    <label for="resources">Resources</label>
+    <select formControlName="resources" id="resources" (change)="navigateTo($event.target.value)">
+        <option selected="selected">select resource</option>
+        <option>all</option>
+        <option *ngFor="let res of resources">
+            {{res}}
         </option>
     </select>
 </form>

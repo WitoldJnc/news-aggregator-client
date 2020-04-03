@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {NewsService} from "./service/news.service";
-import {Content} from "./model/Content";
-import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {SharedService} from "./service/shared.service";
+import {Content} from "./model/Content";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-root',
@@ -12,10 +12,8 @@ import {SharedService} from "./service/shared.service";
 })
 export class AppComponent implements OnInit {
 
-    content: Array<Content>;
     resources: Array<string>;
-    catigories: Set<string>;
-
+    content: Array<Content>;
     resForm: FormGroup;
 
     constructor(private newsService: NewsService,
@@ -24,14 +22,12 @@ export class AppComponent implements OnInit {
                 private fb: FormBuilder) {
 
         this.resForm = this.fb.group({
-            catigories: [''],
+            resources: [''],
         });
-
     }
 
     ngOnInit() {
         this.getAllRss();
-
     }
 
     private getAllRss() {
@@ -43,32 +39,17 @@ export class AppComponent implements OnInit {
     }
 
 
-    private setCatigories(resource: string) {
-
-    }
-
-    private getCatigoriesByResouce(resouce: string) {
-
-    }
-
-
-    private getAllCatigories() {
-
-    }
-
-
     private navigateTo(value: any) {
-        this.shared.contentList = this.content;
-
         if (value === 'all') {
-            this.router.navigate(['/main']);
+            this.router.navigate(['/res/all']);
+            this.shared.onCatigoriesInit.emit('all');
+            this.shared.onContentInit.emit(this.content);
             return;
         }
-        this.shared.onMainEvent.emit(value);
         this.router.navigate(['/res/', value]);
+        this.shared.onCatigoriesInit.emit(value);
+        this.shared.onContentInit.emit(this.content.filter(x => x.resource === value))
     }
-
-
 
 }
 
