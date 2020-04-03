@@ -6,8 +6,8 @@ import {MainResourceComponent} from "./view/main-resource/main-resource.componen
 
 const routes: Routes = [
     {path: '', component: MainResourceComponent},
-    {path: ':res', component: ResourceComponent},
-    {path: 'full/main', component: MainResourceComponent},
+    {path: 'res/:res', component: ResourceComponent},
+    {path: 'main', component: MainResourceComponent},
 ];
 
 @NgModule({

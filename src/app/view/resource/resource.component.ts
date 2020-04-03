@@ -17,23 +17,18 @@ export class ResourceComponent implements OnInit {
                 private newsService: NewsService,
                 private shared: SharedService) {
 
-
     }
 
     ngOnInit() {
-        this.emite();
+        this.initNews();
+
     }
 
-    private emite() {
-        this.shared.onMainEvent.subscribe(news => {
-            this.getNewsByResource(news);
-        });
-    }
-
-    private getNewsByResource(res: any) {
-        this.newsService.getNewsByResource(res)
+    private initNews() {
+        this.shared.onMainEvent
             .subscribe(data => {
-                this.news = data;
+                this.news = this.shared.contentList.filter(x => x.resource === data)[0];
             });
     }
+
 }

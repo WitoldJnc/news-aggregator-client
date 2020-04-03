@@ -1,5 +1,3 @@
-<p>resource works!</p>
-
 <div *ngIf="news">
     <div class="container">
         <h2>Ресурс: {{news.resource}}</h2>
@@ -7,10 +5,12 @@
         <a href="/{{news.news.feed.url}}">{{news.news.feed.url}}</a>
     </div>
 
-    <div *ngFor="let item of news.news.items">
+    <div *ngFor="let item of news.news.items ">
         <p>{{item.link}}</p>
         <p>{{item.content}}</p>
-
+        <div *ngFor="let cat of item.categories">
+            <h4>{{cat}}</h4>
+        </div>
         <br>
     </div>
 </div>

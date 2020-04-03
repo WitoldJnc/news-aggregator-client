@@ -10,27 +10,21 @@ import {SharedService} from "../../service/shared.service";
 })
 export class MainResourceComponent implements OnInit {
     content: Array<Content>;
-    byCatigory: string;
+    catigories: Array<string>;
 
-    constructor(private newsService: NewsService, private shared: SharedService) {
-        this.emiteCatigory();
+
+    constructor(private newsService: NewsService,
+                private shared: SharedService) {
+
     }
 
     ngOnInit() {
-        this.getAllContent();
+        this.initContentList();
+
     }
 
-    private emiteCatigory() {
-        this.shared.onMainEvent
-            .subscribe(data => {
-                this.byCatigory = data;
-            });
-    }
 
-    private getAllContent() {
-        this.newsService.getAllRss()
-            .subscribe(data => {
-                this.content = data;
-            });
+    private initContentList() {
+        this.content = this.shared.contentList;
     }
 }
