@@ -4,7 +4,6 @@ import {NewsService} from "../../service/news.service";
 import {Content} from "../../model/Content";
 import {SharedService} from "../../service/shared.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {log} from "util";
 
 @Component({
     selector: 'app-resource',
@@ -86,15 +85,19 @@ export class ResourceComponent implements OnInit {
 
     }
 
-    changeSelect() {
+    private changeSelect() {
         this.selectedCat = this.resForm.value.catigories;
     }
 
-    openResource(resource: string, fullLink: boolean) {
-        if (fullLink) {
-            window.open(resource)
-        } else {
-            window.open(`https://${resource}`);
-        }
+    private openResource(resource: string) {
+        window.open(`https://${resource}`);
+    }
+
+    private openNews(res: string) {
+        window.open(res);
+    }
+
+    selectThisCat(cat: string) {
+        this.selectedCat = cat;
     }
 }

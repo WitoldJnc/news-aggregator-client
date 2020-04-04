@@ -1,4 +1,4 @@
-<form *ngIf="catigories" class="container"
+<form *ngIf="catigories" class="selectContainer header"
       [formGroup]="resForm"
       (change)="changeSelect()">
     <label for="catigories">Catigoies</label>
@@ -13,22 +13,27 @@
 </form>
 
 
-<div class="newsCard" *ngFor="let co of content | newsNotNull: selectedCat | searchBy: searchBy">
-    <h1 class="feed-resource" (click)="openResource(co.resource,false)">{{co.resource}}</h1>
-    <p class="feed-description"(click)="openResource(co.resource,false)">{{co.news.feed.description}}</p>
+<div class="container newsCard" *ngFor="let co of content | newsNotNull: selectedCat | searchBy: searchBy">
+    <h1 class="feed-resource" (click)="openResource(co.resource)">{{co.resource}}</h1>
+    <p class="feed-description">{{co.news.feed.description}}</p>
 
+    <hr>
 
     <div *ngFor="let item of co.news.items | byCatigories: selectedCat | bySearch: searchBy">
 
         <h4 class="news-title">{{item.title}}</h4>
-        <h4 class="news-link" (click)="openResource(item.link, true)">{{item.link}}</h4>
         <p class="news-date">{{item.pubDate}}</p>
+        <h4 class="news-link" (click)="openNews(item.link)">{{item.link}}</h4>
+        <div *ngIf="item.enclosure.link">
+            <img src="{{item.enclosure.link.toString()}}">
+        </div>
         <p class="news-content">{{item.content}}</p>
         <div *ngFor="let cat of item.categories">
-            <h4>{{cat}}</h4>
+            <h4 (click)="selectThisCat(cat)">{{cat}}</h4>
         </div>
 
         <br>
+        <hr>
     </div>
 
     <br>
