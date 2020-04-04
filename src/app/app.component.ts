@@ -51,6 +51,9 @@ export class AppComponent implements OnInit {
         this.shared.onContentInit.emit(this.content.filter(x => x.resource === value))
     }
 
+    updateResources() {
+        this.getAllRss();
+    }
 }
 
 

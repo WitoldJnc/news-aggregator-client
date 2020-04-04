@@ -7,7 +7,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {ResourceComponent} from "./view/resource/resource.component";
 import {ByCatigoriesPipe} from './service/by-catigories.pipe';
-import { NewsNotNullPipe } from './service/news-not-null.pipe';
+import {NewsNotNullPipe} from './service/news-not-null.pipe';
+import {BySearchPipe} from './service/by-search.pipe';
+import {SearchByPipe} from "./service/search-by.pipe";
 
 @NgModule({
     declarations: [
@@ -15,6 +17,8 @@ import { NewsNotNullPipe } from './service/news-not-null.pipe';
         ResourceComponent,
         ByCatigoriesPipe,
         NewsNotNullPipe,
+        BySearchPipe,
+        SearchByPipe,
     ],
     imports: [
         BrowserModule,

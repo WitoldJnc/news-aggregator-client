@@ -7,11 +7,11 @@ import {Item} from "../model/Item";
 export class ByCatigoriesPipe implements PipeTransform {
 
     transform(value: Item[], catigory: string): Item[] {
-        if (catigory === 'all' || catigory === undefined || catigory === null) {
+        if (catigory === 'all' || catigory === undefined ) {
             return value;
         } else {
             return value
-                .filter(x => x.categories.toString() === catigory);
+                .filter(x => x.categories.toString().includes(catigory));
         }
     }
 

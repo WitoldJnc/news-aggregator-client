@@ -4,6 +4,7 @@ import {NewsService} from "../../service/news.service";
 import {Content} from "../../model/Content";
 import {SharedService} from "../../service/shared.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {log} from "util";
 
 @Component({
     selector: 'app-resource',
@@ -16,6 +17,7 @@ export class ResourceComponent implements OnInit {
     catigories: Set<string>;
     resForm: FormGroup;
     selectedCat = 'all';
+    searchBy: string;
 
     constructor(private router: Router,
                 private newsService: NewsService,
@@ -24,6 +26,7 @@ export class ResourceComponent implements OnInit {
 
         this.resForm = this.fb.group({
             catigories: [''],
+            searchBy: ['']
         });
 
     }
@@ -58,7 +61,9 @@ export class ResourceComponent implements OnInit {
         this.shared.onContentInit
             .subscribe(content => {
                 const catigories = content.map(x => x.news.items
-                    .map(c => c.categories.toString()));
+                    .map(c => c.categories.toString()))
+                    .toString().split(',');
+
 
                 this.catigories = new Set(catigories.concat.apply([], catigories));
             });
@@ -72,7 +77,8 @@ export class ResourceComponent implements OnInit {
                 const catigories = content
                     .filter(x => x.resource === resource)
                     .map(c => c.news.items
-                        .map(v => v.categories.toString()));
+                        .map(v => v.categories.toString()))
+                    .toString().split(',');
 
                 this.catigories = new Set(catigories.concat.apply([], catigories));
             });
@@ -82,5 +88,13 @@ export class ResourceComponent implements OnInit {
 
     changeSelect() {
         this.selectedCat = this.resForm.value.catigories;
+    }
+
+    openResource(resource: string, fullLink: boolean) {
+        if (fullLink) {
+            window.open(resource)
+        } else {
+            window.open(`https://${resource}`);
+        }
     }
 }
