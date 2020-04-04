@@ -18,7 +18,7 @@ export class NewsService {
 
 
     public getAllRss(): Observable<Content[]> {
-        return this.http.get<Content[]>(this.url + 'rss');
+        return this.http.get<Content[]>(this.url + 'api/v1/rss');
     }
 
     public getCatigories(): Observable<string[]> {
