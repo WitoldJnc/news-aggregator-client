@@ -1,0 +1,16 @@
+.newsCard {
+  background: ivory;
+  .feed-resource, .feed-description, .news-title {
+    text-align: center;
+  }
+  .news-content {
+    &:hover {
+      background: #fff3e6;
+    }
+  }
+
+  img {
+    width: 50%;
+    margin-left: 25%;
+  }
+}

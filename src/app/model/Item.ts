@@ -1,3 +1,5 @@
+import {Enclosure} from "./Enclosure";
+
 export class Item {
     title: string;
     pubDate: string;
@@ -5,5 +7,6 @@ export class Item {
     guid: string;
     description: string;
     content: string;
+    enclosure: Enclosure;
     categories: string[];
 }

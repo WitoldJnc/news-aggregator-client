@@ -6,15 +6,19 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {ResourceComponent} from "./view/resource/resource.component";
-import { MainResourceComponent } from './view/main-resource/main-resource.component';
-import { ByCatigoriesPipe } from './service/by-catigories.pipe';
+import {ByCatigoriesPipe} from './service/by-catigories.pipe';
+import {NewsNotNullPipe} from './service/news-not-null.pipe';
+import {BySearchPipe} from './service/by-search.pipe';
+import {SearchByPipe} from "./service/search-by.pipe";
 
 @NgModule({
     declarations: [
         AppComponent,
         ResourceComponent,
-        MainResourceComponent,
-        ByCatigoriesPipe
+        ByCatigoriesPipe,
+        NewsNotNullPipe,
+        BySearchPipe,
+        SearchByPipe,
     ],
     imports: [
         BrowserModule,

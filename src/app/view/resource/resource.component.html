@@ -1,16 +1,40 @@
-<p>resource works!</p>
+<form *ngIf="catigories" class="selectContainer header"
+      [formGroup]="resForm"
+      (change)="changeSelect()">
+    <label for="catigories">Catigoies</label>
+    <select formControlName="catigories" id="catigories">
+        <option selected="selected">all</option>
+        <option *ngFor="let cat of catigories">
+            {{cat}}
+        </option>
+    </select>
 
-<div *ngIf="news">
-    <div class="container">
-        <h2>Ресурс: {{news.resource}}</h2>
-        <h3>{{news.news.feed.description}}</h3>
-        <a href="/{{news.news.feed.url}}">{{news.news.feed.url}}</a>
-    </div>
+    <input type="text" [(ngModel)]="searchBy" formControlName="searchBy">
+</form>
 
-    <div *ngFor="let item of news.news.items">
-        <p>{{item.link}}</p>
-        <p>{{item.content}}</p>
+
+<div class="container newsCard" *ngFor="let co of content | newsNotNull: selectedCat | searchBy: searchBy">
+    <h1 class="feed-resource" (click)="openResource(co.resource)">{{co.resource}}</h1>
+    <p class="feed-description">{{co.news.feed.description}}</p>
+
+    <hr>
+
+    <div *ngFor="let item of co.news.items | byCatigories: selectedCat | bySearch: searchBy">
+
+        <h4 class="news-title">{{item.title}}</h4>
+        <p class="news-date">{{item.pubDate}}</p>
+        <h4 class="news-link" (click)="openNews(item.link)">{{item.link}}</h4>
+        <div *ngIf="item.enclosure.link">
+            <img src="{{item.enclosure.link.toString()}}">
+        </div>
+        <p class="news-content">{{item.content}}</p>
+        <div *ngFor="let cat of item.categories">
+            <h4 (click)="selectThisCat(cat)">{{cat}}</h4>
+        </div>
 
         <br>
+        <hr>
     </div>
+
+    <br>
 </div>

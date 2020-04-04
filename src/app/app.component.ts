@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {NewsService} from "./service/news.service";
-import {Content} from "./model/Content";
-import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {SharedService} from "./service/shared.service";
+import {Content} from "./model/Content";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-root',
@@ -12,57 +12,47 @@ import {SharedService} from "./service/shared.service";
 })
 export class AppComponent implements OnInit {
 
-    content: Array<Content>;
-    catigories: Array<string>;
     resources: Array<string>;
-    selectedCatigory: string;
-
+    content: Array<Content>;
     resForm: FormGroup;
 
     constructor(private newsService: NewsService,
                 private router: Router,
-                private fb: FormBuilder,
-                private shared: SharedService
-    ) {
+                private shared: SharedService,
+                private fb: FormBuilder) {
 
         this.resForm = this.fb.group({
             resources: [''],
-            catigories: ['']
         });
     }
 
     ngOnInit() {
-        this.getAllResouces();
-        this.getAllCatigories();
+        this.getAllRss();
     }
 
-
-    private getAllCatigories() {
-        this.newsService.getCatigories()
-            .subscribe(data => {
-                this.catigories = data;
+    private getAllRss() {
+        this.newsService.getAllRss()
+            .subscribe(content => {
+                this.content = content;
+                this.resources = content.map(x => x.resource);
             });
     }
 
-    private getAllResouces() {
-        this.newsService.getResources()
-            .subscribe(data => {
-                this.resources = data;
-            });
-    }
 
     private navigateTo(value: any) {
         if (value === 'all') {
-            this.router.navigate(['/full/main']);
+            this.router.navigate(['/res/all']);
+            this.shared.onCatigoriesInit.emit('all');
+            this.shared.onContentInit.emit(this.content);
             return;
         }
-        this.shared.onMainEvent.emit(value);
-        this.router.navigate([value]);
-
+        this.router.navigate(['/res/', value]);
+        this.shared.onCatigoriesInit.emit(value);
+        this.shared.onContentInit.emit(this.content.filter(x => x.resource === value))
     }
 
-    emitCatigory() {
-        this.shared.onMainEvent.emit(this.selectedCatigory);
+    updateResources() {
+        this.getAllRss();
     }
 }
 
