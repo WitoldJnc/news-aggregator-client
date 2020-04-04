@@ -85,15 +85,15 @@ export class ResourceComponent implements OnInit {
 
     }
 
-    private changeSelect() {
+     changeSelect() {
         this.selectedCat = this.resForm.value.catigories;
     }
 
-    private openResource(resource: string) {
+     openResource(resource: string) {
         window.open(`https://${resource}`);
     }
 
-    private openNews(res: string) {
+     openNews(res: string) {
         window.open(res);
     }
 

@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     }
 
 
-    private navigateTo(value: any) {
+     navigateTo(value: any) {
         if (value === 'all') {
             this.router.navigate(['/res/all']);
             this.shared.onCatigoriesInit.emit('all');
