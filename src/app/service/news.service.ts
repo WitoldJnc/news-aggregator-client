@@ -12,7 +12,8 @@ export class NewsService {
     url: string;
 
     constructor(private http: HttpClient) {
-        this.url = environment.serviceUrl;
+        // this.url = environment.serviceUrl;
+        this.url = 'https://news-aggreagator-for-polina.herokuapp.com/';
     }
 
 
